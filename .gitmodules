@@ -1,0 +1,6 @@
+[submodule "styles/solarized-gedit"]
+	path = styles/solarized-gedit
+	url = https://github.com/adjohnson916/solarized-gedit.git
+[submodule "language-specs/gedit-jade"]
+	path = language-specs/gedit-jade
+	url = https://github.com/adjohnson916/gedit-jade.git
