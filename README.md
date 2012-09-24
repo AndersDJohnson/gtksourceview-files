@@ -14,6 +14,12 @@ Download any files you want to use. Add (or symlink to) them in your gtksourcevi
  - "/usr/share/gtksourceview-2.0/"
  - "/usr/share/gtksourceview-3.0/"
 
+If you want to use any of the submodules, you'll have to clone this repository, then run:
+
+ 1. `cd WHERE_YOU_PUT_IT`
+ 2. `git submodule init`
+ 3. `git submodule update`
+
 To see changes, you may need to restart your gtksourceview-dependent program (i.e. gedit).
 
 ## License
