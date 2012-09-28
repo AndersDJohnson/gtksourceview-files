@@ -33,6 +33,7 @@
     <property name="globs">*.less</property>
     <property name="block-comment-start">/*</property>
     <property name="block-comment-end">*/</property>
+    <property name="line-comment-start">//</property>
   </metadata>
 
   <styles>
@@ -472,6 +473,7 @@
       <start>\{</start>
       <end>\}</end>
       <include>
+        <context ref="def:c-like-comment"/>
         <context ref="def:c-like-comment-multiline"/>
         <context ref="def:c-like-close-comment-outside-comment"/>
         <context ref="at-rules"/>
@@ -507,6 +509,7 @@
     <context id="less" class="no-spell-check">
       <include>
         <context ref="def:string"/>
+        <context ref="def:c-like-comment"/>
         <context ref="def:single-quoted-string"/>
         <context ref="def:c-like-comment-multiline"/>
         <context ref="def:c-like-close-comment-outside-comment"/>
