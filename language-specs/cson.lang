@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+ Author: Marc Harter <wavded@gmail.com>
+ Copyright (C) 2004 Marc Harter <wavded@gmail.com>
+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ Library General Public License for more details.
+
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the
+ Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ Boston, MA 02111-1307, USA.
+
+-->
+<language id="cson" _name="CSON" version="2.0" _section="Others">
+    <metadata>
+        <property name="mimetypes">application/cson;text/cson</property>
+        <property name="globs">*.cson</property>
+    </metadata>
+
+    <styles>
+        <style id="error"           _name="Error"                    map-to="def:error"/>
+        <style id="string"          _name="String"                   map-to="def:string"/>
+        <style id="global"          _name="Global Value"             map-to="def:special-constant"/>
+        <style id="operator"        _name="Operator"                 map-to="def:operator"/>
+        <style id="constant"        _name="Constant"                 map-to="def:special-constant"/>
+        <style id="boolean"         _name="Boolean value"            map-to="def:boolean"/>
+        <style id="assessor"        _name="Assessor"                 map-to="def:identifier"/>
+    </styles>
+
+    <definitions>
+        <context id="cson">
+            <include>
+                <!-- Strings -->
+                <context id="string-heredocs-single" style-ref="string">
+                    <start>'''</start>
+                    <end>'''</end>
+                    <include>
+                        <context ref="def:line-continue"/>
+                        <context ref="def:escape"/>
+                    </include>
+                </context>
+
+                <context id="string-heredocs-double" style-ref="string">
+                    <start>"""</start>
+                    <end>"""</end>
+                    <include>
+                        <context ref="def:line-continue"/>
+                        <context ref="def:escape"/>
+                        <context id="interpolation-heredocs-double" style-ref="assessor" extend-parent="false">
+                            <match>\#{[^}]+}</match>
+                        </context>
+                    </include>
+                </context>
+
+                <context id="string-double" style-ref="string">
+                    <start>"</start>
+                    <end>"</end>
+                    <include>
+                        <context id="interpolation-string-double" style-ref="assessor" extend-parent="false">
+                            <match>\#{[^}]+}</match>
+                        </context>
+                    </include>
+                </context>
+
+                <context id="string-single" style-ref="string">
+                    <start>'</start>
+                    <end>'</end>
+                    <include>
+                        <context ref="def:line-continue"/>
+                        <context ref="def:escape"/>
+                    </include>
+                </context>
+
+               
+                <!-- Numbers -->
+                <context ref="def:float"/>
+                <context ref="def:decimal"/>
+                <context ref="def:octal"/>
+                <context ref="def:hexadecimal"/>
+
+                <!-- Constants -->
+
+                <context id="global" style-ref="global">
+                    <keyword>undefined</keyword>
+                    <keyword>null</keyword>
+                </context>
+
+                <context id="constant" style-ref="constant">
+                    <match>\b[A-Z0-9_]+\b</match>
+                </context>
+
+                <context id="boolean" style-ref="boolean">
+                    <keyword>false</keyword>
+                    <keyword>true</keyword>
+                    <keyword>yes</keyword>
+                    <keyword>no</keyword>
+                    <keyword>on</keyword>
+                    <keyword>off</keyword>
+                </context>
+                
+				<context id="operator" style-ref="operator">
+                    <match>(-[\-=>]?|\+[+=]?|[*&amp;|\/%=&lt;&gt;^~:!?]+)([ \t]*)</match>
+                </context>
+				
+			    <context id="assessor" style-ref="assessor">
+                    <match>(@([a-zA-Z\$_](\w|\$)*)|this)</match>
+                </context>
+                
+            </include>
+        </context>
+    </definitions>
+</language>
