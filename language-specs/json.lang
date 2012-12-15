@@ -28,6 +28,7 @@
 -->
 <language id="json" name="JSON" version="2.0" _section="Others">
   <metadata>
+    <property name="mimetypes">application/json;text/json</property>
     <property name="globs">*.json</property>
   </metadata>
 
