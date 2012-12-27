@@ -160,6 +160,7 @@
 
                 <context id="loop" style-ref="loop">
                     <keyword>for</keyword>
+                    <keyword>own</keyword>
                     <keyword>while</keyword>
                     <keyword>until</keyword>
                     <keyword>loop</keyword>
